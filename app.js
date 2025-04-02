@@ -95,6 +95,11 @@ app.use((req,res,next)=>
     next();
   });
 
+
+  app.get("/",(req,res)=>
+  {
+    res.render("./lists/home.ejs");
+  })
 const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js")
 const userRouter=require("./routes/user.js")
