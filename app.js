@@ -106,9 +106,6 @@ app.use("/",userRouter);
 
 
 
-  app.get("/", (req, res) => {
-    res.send("Hi, I am root");
-  });
 
 // const ExpressError=require("./ExpressError");
 // app.get('/err',(req,res)=>
