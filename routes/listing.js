@@ -13,7 +13,7 @@ const upload = multer({storage});
 // router.route --- combine same path with different requests
 
 router
-  .route("/",Listing.ListingController.index)
+  .route("/",ListingController.index)
   .get(wrapAsync(ListingController.index))
   .post(isLoggedin,upload.single("listing[image]"),validatelisting,wrapAsync(ListingController.CreateListings));
 
