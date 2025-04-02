@@ -57,7 +57,7 @@ mongoose.connection.on("error", (err) => {
 const store=MongoStore.create({
   mongoUrl:atlas_url,
   crypto:{
-    secret:'manju',
+    secret:process.env.SECRET,
   },
   touchAfter:24*3600,
 });
@@ -68,7 +68,7 @@ store.on("error",()=>
 });
   const sessionOpt= {
     store,
-    secret:'manju',
+    secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
     cookie:{
