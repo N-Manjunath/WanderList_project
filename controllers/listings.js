@@ -1,4 +1,5 @@
 const Listing=require("../models/model.js");
+const ExpressError=require("../utils/ExpressError.js");
 module.exports.index=async (req, res) => {
     const allListings = await Listing.find().limit(10);
     console.log("error detected",allListings);
