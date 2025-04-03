@@ -23,7 +23,7 @@ const atlas_url=process.env.ATLAS_DB;
 //   await mongoose.connect(atlas_url);
 // }
 mongoose.connect(atlas_url, {
-  serverSelectionTimeoutMS: 30000,  // ⏳ Increase timeout to 30 seconds
+  //serverSelectionTimeoutMS: 30000,  // ⏳ Increase timeout to 30 seconds
 }).then(() => {
   console.log("✅ Connected to MongoDB Atlas");
 }).catch(err => {
@@ -89,9 +89,10 @@ passport.deserializeUser(User.deserializeUser());
 
 app.use((req,res,next)=>
   {
+    console.log("the user is ",req.user);
     res.locals.success=req.flash("success");
     res.locals.error=req.flash("error");
-    res.locals.CUser=req.user;
+    res.locals.CUser=req.user || null;
     next();
   });
 
