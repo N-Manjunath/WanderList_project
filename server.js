@@ -5,7 +5,8 @@ const session=require("express-session");
 
 app.use(session(
     {
-        secret:'manju',
+        require("dotenv").config();
+secret: process.env.SECRET,
         resave:false,
         saveUninitialized:true,
         cookie:{
