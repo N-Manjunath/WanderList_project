@@ -1,4 +1,4 @@
- <%layout('layout/boilerplate')-%>
+ <!-- <%layout('layout/boilerplate')-%>
  <body>
    <div class="row offset-2">
      <h5>Create a New Listing</h5>
@@ -59,4 +59,17 @@
      </form>
    </div>
  </body>
- 
+  -->
+
+
+  // ✅ views/lists/new.ejs
+<form action="/listings" method="POST">
+  <input type="text" name="listing[title]" placeholder="Title" required>
+  <input type="text" name="listing[description]" placeholder="Description" required>
+  <input type="text" name="listing[image][url]" placeholder="Image URL" required>
+  <input type="text" name="listing[image][filename]" placeholder="Image filename" required>
+  <input type="number" name="listing[price]" placeholder="Price" required>
+  <input type="text" name="listing[location]" placeholder="Location" required>
+  <input type="text" name="listing[country]" placeholder="Country" required>
+  <button type="submit">Submit</button>
+</form>
