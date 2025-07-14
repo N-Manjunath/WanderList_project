@@ -31,7 +31,6 @@ module.exports.Signup=async(req,res,next)=>
                 req.flash("error",err.message);
                 res.redirect("/signup");
             }
-          
         };
 
 module.exports.renderLogin=(req,res)=>
@@ -40,8 +39,11 @@ module.exports.renderLogin=(req,res)=>
     }
 module.exports.Login=async(req,res)=>
     {
+          console.log("✅ the user is", req.user); // Should always show user now!
         req.flash("success","you are logged in!");
-        let redirectUrl=res.locals.redirectUrl || "/listings";
+       // let redirectUrl=res.locals.redirectUrl || "/listings";
+         const redirectUrl = req.session.redirectUrl || "/listings";
+        delete req.session.redirectUrl;
         res.redirect(redirectUrl);
     };
 
