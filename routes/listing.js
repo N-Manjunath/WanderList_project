@@ -34,60 +34,28 @@
 
 
 
-// const express = require("express");
-// const router = express.Router();
-// const Listing = require("../models/model");
-// const { validatelisting } = require("../middleware");
-// const wrapAsync = require("../utils/wrapAsync"); // create this if needed
-
-// // Route to show form (GET)
-// router.get("/new", (req, res) => {
-//   res.render("lists/new.ejs"); // You must create this EJS file
-// });
-
-// // Route to insert new listing (POST)
-// router.post("/", validatelisting, wrapAsync(async (req, res) => {
-//   const listing = new Listing(req.body.listing);
-//   await listing.save();
-//   req.flash("success", "New listing added!");
-//   res.redirect(`/listings/${listing._id}`);
-// }));
-
-// // Route to show the listing (GET)
-// router.get("/:id", wrapAsync(async (req, res) => {
-//   const listing = await Listing.findById(req.params.id);
-//   if (!listing) {
-//     req.flash("error", "Listing not found.");
-//     return res.redirect("/listings");
-//   }
-//   res.render("lists/show.ejs", { listing });
-// }));
-
-// module.exports = router;
-
-
-
-// ✅ routes/listing.js
 const express = require("express");
 const router = express.Router();
 const Listing = require("../models/model");
-const { validatelisting, isLoggedin, isOwner } = require("../middleware");
-const wrapAsync = require("../utils/wrapAsync");
+const { validatelisting } = require("../middleware");
+const wrapAsync = require("../utils/wrapAsync"); // create this if needed
 
-router.get("/new", isLoggedin, (req, res) => {
-  res.render("lists/new.ejs");
+// Route to show form (GET)
+router.get("/new", (req, res) => {
+  res.render("lists/new.ejs"); // You must create this EJS file
 });
 
-router.post("/", isLoggedin, validatelisting, wrapAsync(async (req, res) => {
+// Route to insert new listing (POST)
+router.post("/", validatelisting, wrapAsync(async (req, res) => {
   const listing = new Listing(req.body.listing);
-  listing.owner = req.user._id;
   await listing.save();
   req.flash("success", "New listing added!");
   res.redirect(`/listings/${listing._id}`);
 }));
 
+// Route to show the listing (GET)
 router.get("/:id", wrapAsync(async (req, res) => {
-  const listing = await Listing.findById(req.params.id).populate("owner");
+  const listing = await Listing.findById(req.params.id);
   if (!listing) {
     req.flash("error", "Listing not found.");
     return res.redirect("/listings");
@@ -96,3 +64,6 @@ router.get("/:id", wrapAsync(async (req, res) => {
 }));
 
 module.exports = router;
+
+
+

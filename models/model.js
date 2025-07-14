@@ -68,32 +68,6 @@
 
 
 
-// const mongoose = require("mongoose");
-
-// const listingSchema = new mongoose.Schema({
-//   title: String,
-//   description: String,
-//   image: {
-//     url: String,
-//     filename: String
-//   },
-//   price: Number,
-//   location: String,
-//   country: String,
-//   owner: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: "User"
-//   }
-// });
-
-// module.exports = mongoose.model("Listing", listingSchema);
-
-
-
-
-
-
-// ✅ models/model.js
 const mongoose = require("mongoose");
 
 const listingSchema = new mongoose.Schema({
@@ -113,3 +87,9 @@ const listingSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Listing", listingSchema);
+
+
+
+
+
+
