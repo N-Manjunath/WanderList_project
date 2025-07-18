@@ -29,43 +29,73 @@
     {
       display: none;
     }
+    .filter a{
+      text-decoration: none;
+      color :inherit;
+    }
   </style>
   <div id="filters">
     <div class="filter">
-      <i class="fa-solid fa-fire"></i>
-      <p>Trending</p>
+     <a href="/listings/category/Trending"><i class="fa-solid fa-fire"></i>
+      <p>Trending</p></a>
     </div>
     <div class="filter">
-      <i class="fa-solid fa-bed"></i>     
-       <p>Rooms</p>
+      <a href="/listings/category/Temples"><i class="fa-solid fa-gopuram"></i>     
+       <p>Temples</p></a>
+    </div>
+     <div class="filter">
+    <a href="/listings/category/Beaches">
+      <i class="fa-solid fa-umbrella-beach"></i>
+      <p>Beaches</p></a>
+    </a> 
     </div>
     <div class="filter">
-      <i class="fa-solid fa-water-ladder"></i> 
-           <p>Amazing pools</p>
+     <a href="/listings/category/Water%20Falls">
+       <i class="fa-solid fa-water-ladder"></i> 
+           <p>Water Falls</p>
+     </a>
     </div>
     <div class="filter">
-      <i class="fa-solid fa-mountain-sun"></i>    
-        <p>Moutain View</p>
+      <a href="/listings/category/Hill%20Stations">
+        <i class="fa-solid fa-mountain-sun"></i>    
+        <p>Hill Stations</p>
+      </a>
     </div>
     <div class="filter">
-      <i class="fa-solid fa-sailboat"></i>
-      <p>boats</p>
+      <a href="/listings/category/Top%20Cities">
+        <i class="fa-solid fa-city"></i>
+      <p>Top Cities</p>
+      </a>
     </div>
     <div class="filter">
-      <i class="fa-solid fa-snowflake"></i>
-      <p>Arctic</p>
+     <a href="/listings/category/Islands">
+       <i class="fa-solid fa-snowflake"></i>
+      <p>Islands</p>
+     </a>
     </div>
     <div class="filter">
-      <i class="fa-solid fa-tree"></i>
-      <p>Tropical</p>
+     <a href="/listings/category/Parks">
+       <i class="fa-solid fa-tree"></i>
+      <p>Park</p>
+     </a>
     </div>
     <div class="filter">
-      <i class="fa-solid fa-city"></i>
-      <p>Top cities</p>
+    <a href="/listings/category/Mountains">
+        <i class="fa-solid fa-mountain"></i>
+      <p>Mountains</p>
+    </a>
     </div>
     <div class="filter">
-      <i class="fa-solid fa-baseball-bat-ball"></i>
-      <p>play</p>
+      <a href="/listings/category/Deserts">
+        <i class="fa-brands fa-canadian-maple-leaf"></i>
+      <p>Deserts</p>
+      </a>
+    </div>
+    <div class="filter">
+      <a href="/listings/category/Other">
+        <i class="fa-solid fa-baseball-bat-ball"></i>
+      <p>Other</p>
+      </a>
     </div>
     <div class="tab-switch">
     <div class="form-check form-switch form-check-reverse">
@@ -82,11 +112,19 @@
           <div class="card-img-overlay"></div>
           <div class="card-body">
               <h5><%=listing.title%></h5>
-              <p>
+              <!-- <p>
                 &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %>
                 
-                <i class="tab-info">+ 18% GST</i>
-              </p>
+                <i class="tab-info"><%=listing.price%>*0.18</i>
+              </p> -->
+              <p>
+  <span class="price-base">&#8377;<%= listing.price.toLocaleString("en-IN") %></span>
+  <span class="price-tax" style="display: none;">
+    &#8377;<%= Math.round(listing.price * 1.18).toLocaleString("en-IN") %>
+  </span>
+  <!-- <i class="tab-info">+ 18% GST</i> -->
+</p>
+
               
               
             </div>
@@ -95,6 +133,22 @@
         <% } %>
     
     </div>
+    <script>
+  const toggle = document.getElementById("flexSwitchCheckDefault");
+  toggle.addEventListener("change", function () {
+    const basePrices = document.querySelectorAll(".price-base");
+    const taxPrices = document.querySelectorAll(".price-tax");
+
+    if (this.checked) {
+      basePrices.forEach(el => el.style.display = "none");
+      taxPrices.forEach(el => el.style.display = "inline");
+    } else {
+      basePrices.forEach(el => el.style.display = "inline");
+      taxPrices.forEach(el => el.style.display = "none");
+    }
+  });
+</script>
+
    
  
 

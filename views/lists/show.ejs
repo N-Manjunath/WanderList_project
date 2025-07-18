@@ -12,7 +12,7 @@
         </div>
           <div class="mb-2">
             <p>&#8377;<%= listing.price ? Number(listing.price).toLocaleString("en-IN") : "Price not available" %></p></div>
-           
+           <div class="mb-2"><%=listing.category%></div>
           <div class="mb-2">
             <%= listing.location %>
           </div>

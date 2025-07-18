@@ -307,9 +307,10 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
+    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
     httpOnly: true,
-    secure: false,
+    // secure: false,
+    secure: process.env.NODE_ENV === 'production', 
   },
 };
 
@@ -324,12 +325,22 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
-  res.locals.CUser = req.user || null;
+  // res.locals.CUser = req.user || null;
+    res.locals.CUser = req.user; 
   next();
 });
 
-const listingRouter = require("./routes/listing");
+// const listingRouter = require("./routes/listing");
+// app.use("/listings", listingRouter);
+
+// Import routers after all middleware that they might depend on (like passport, flash)
+const listingRouter = require("./routes/listing"); // Assuming this path is correct
+const reviewRouter = require("./routes/review");   // Assuming this path is correct
+const userRouter = require("./routes/user");     // Assuming this path is correct
+
 app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter); // User routes are often mounted at the root
 
 app.get("/", (req, res) => {
   res.render("lists/home.ejs");
@@ -343,6 +354,8 @@ app.use((err, req, res, next) => {
   const { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).render("lists/error.ejs", { message });
 });
+
+
 
 app.listen(8080, () => {
   console.log("Server is listening on port 8080");

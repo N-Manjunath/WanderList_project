@@ -15,12 +15,52 @@
       <textarea name="listing[description]" class="form-control" required><%= listing.description.trim()%></textarea>  
       <div class="invalid-feedback">enter the description</div>
     </div>
-    <img src="<%=originalUrl%>">
+    <!-- Preview current image -->
 <div class="mb-3">
-  <label for="Image" class="form-label">Image</label>
-  <input name="listing[image]"  type="file" class="form-control" required/>
-  <div class="invalid-feedback">Enter  valid url</div>
+  <label class="form-label">Current Image</label><br />
+  <img src="<%= originalUrl %>" class="img-thumbnail mb-2" width="250" alt="Preview" />
+</div>
+
+    <!-- <img src="<%=originalUrl%>"> -->
+    <div class="row">
+     
+   <div class="col-8">
+<div class="mb-3">
+  <!-- <label for="Image" class="form-label">Image</label>
+  <input type="hidden" name="listing[image]"  type="file" class="form-control"/>
+ <!-- Hidden input to retain old image if user doesn't upload -->
+<input type="hidden" name="listing[image][url]" value="<%= listing.image.url %>">
+<input type="hidden" name="listing[image][filename]" value="<%= listing.image.filename %>">
+
+<!-- Optional new image upload -->
+<div class="mb-3">
+  <label for="image" class="form-label">Upload New Image (optional)</label>
+  <input name="listing[image]" type="file" class="form-control" />
+</div>
+  <!-- <div class="invalid-feedback">Enter  valid url</div> -->
 </div>  
+   </div> 
+
+ <div class="col-4">
+  <div class="mb-3">
+          <label for="category" class="form-label">Category</label>       
+  <select name="listing[category]" class="form-control" required>
+ <option value=""><% listing.category %></option>
+ <option value="Temples" <%= listing.category && listing.category.trim() === "Temples" ? "selected" : "" %>>Temples</option>
+ <option value="Hill Stations" <%= listing.category && listing.category.trim() === "Hill Stations" ? "selected" : "" %>>Hill Stations</option>
+ <option value="Water Falls" <%= listing.category && listing.category.trim() === "Water Falls" ? "selected" : "" %>>Water Falls</option>
+ <option value="Top Cities" <%= listing.category && listing.category.trim() === "Top Cities" ? "selected" : "" %>>Top Cities</option>
+   <option value="Beaches" <%= listing.category && listing.category.trim() === "Beaches" ? "selected" : "" %>>Beaches</option>
+   <option value="Parks" <%= listing.category && listing.category.trim() === "Parks" ? "selected" : "" %>>Parks</option>
+   <option value="Forests" <%= listing.category && listing.category.trim() === "Forests" ? "selected" : "" %>>Forests</option>
+   <option value="Mountains" <%= listing.category && listing.category.trim() === "Mountains" ? "selected" : "" %>>Mountains</option>
+   <option value="Deserts" <%= listing.category && listing.category.trim() === "Deserts" ? "selected" : "" %>>Deserts</option>
+   <option value="Islands" <%= listing.category && listing.category.trim() === "Islands" ? "selected" : "" %>>Islands</option>
+   <option value="Other" <%= listing.category && listing.category.trim() === "Other" ? "selected" : "" %>>Other</option>
+  </select>
+  </div>
+      </div>
+      </div>
 <br>
       <div class="row">
         <div class="col-4">

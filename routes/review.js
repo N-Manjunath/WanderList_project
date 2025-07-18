@@ -4,7 +4,7 @@ const Listing = require("../models/model.js");
 const Review=require("../models/review.js");
 const {listingSchema,reviewSchema}=require("../serverschema.js");
 const wrapAsync=require("../utils/wrapAsync.js");
-const ExpressError=require("../utils/ExpressError.js");
+const ExpressError=require("../ExpressError.js");
 
 const{validateReviews,isLoggedin,isAuthor}=require("../middleware.js");
 

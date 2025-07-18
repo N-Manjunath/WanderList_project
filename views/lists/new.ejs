@@ -21,13 +21,38 @@
              required></textarea>
            <div class="invalid-feedback">Looks not fine</div>
          </div>
-         <div class="mb-3">
+         <form action="/listings" method="GET">
+         <div class="row align-items-end">
+           <div class="col-md-8">
+           <div class="mb-3">
           <label for="image" class="form-label">Image URL</label>
           <input id="image" name="listing[image]" placeholder="Enter image URL/Link" type="file" class="form-control" required />
           <div class="valid-feedback">Looks fine</div>
         </div>
-         
-         <br>
+         </div>
+         <div class="col-md-4">
+          <div class="mb-3">
+     <label for="category" class="form-label">Category</label>       
+  <select name="listing[category]"  class="form-control" required>
+    <option value="">Choose Category</option>
+    <option value="Temples">Temples</option>
+    <option value="Hill Stations">Hill Stations</option>
+    <option value="Water Falls">Water Falls</option>
+    <option value="Top Cities">Top Cities</option>
+    <option value="Parks">Parks</option>
+    <option value="Beaches">Beaches</option>
+    <option value="Mountains">Mountains</option>
+    <option value="Forests">Forests</option>
+    <option value="Deserts">Deserts</option>
+    <option value="Islands">Islands</option>
+    <option value="Other">Other</option>
+  </select>
+
+
+          </div>
+         </div>
+         </div>
+         </form>
  
          <div class="row">
            <div class="col-4">

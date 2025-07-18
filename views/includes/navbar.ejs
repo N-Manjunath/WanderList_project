@@ -19,12 +19,61 @@
   .search-btn:hover
   {
     background-color: brown;
-    color: white;
+    
+    
   }
+  
   .search-icon
   {
     margin-right: 0.7rem;
   }
+
+  .btn-list
+  {
+    background-color: rgb(154, 33, 17);
+  color: white;
+  text-decoration: none;
+  border-radius: 3rem;
+  padding: 8px 16px;
+  display: inline-block;
+  transition: 0.3s;
+  margin-right: 8px;
+  }
+  .btn-list:hover
+  {
+      background-color: #fff;
+  color: brown;
+  border: 2px solid brown;
+  }
+  .btn-list:active {
+  background-color: #8b0000; /* Darker shade of brown */
+  color: white;
+  border: 2px solid #5c1d1d;
+}
+ .btn-auth {
+  background-color: brown;
+  color: white;
+  text-decoration: none;
+  border-radius: 3rem;
+  padding: 8px 14px;
+  display: inline-block;
+  transition: 0.3s;
+  margin-right: 8px;
+}
+
+.btn-auth:hover {
+  background-color: #fff;
+  color: brown;
+  border: 2px solid brown;
+}
+/* Click (active) effect */
+.btn-auth:active {
+  background-color: #8b0000; /* Darker shade of brown */
+  color: white;
+  border: 2px solid #5c1d1d;
+}
+
+
 </style>
 <nav class="navbar navbar-expand-md sticky-top">
     <div class="container-fluid">
@@ -34,22 +83,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="/listings">All Lists</a>
+          <a class="btn-list" href="/listings">All Lists</a>
         </div>
         <div class="search-info ms-auto">
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search destination" aria-label="Search">
-          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass search-icon"></i>Search</button>
+        <form class="d-flex" role="search" action="/listings" method="GET">
+          <input class="form-control me-2" name="search" type="search" placeholder="Search destination" aria-label="Search"  value="<%= typeof search !== 'undefined' ? search : '' %>">
+          <button class="btn search-btn" type="submit" id="searchButton"><i class="fa-solid fa-magnifying-glass search-icon"></i>Search</button>
         </form>
         </div>
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="/listings/new">Add new list</a>
+          <a class="btn-list" href="/listings/new">Add new list</a>
           <%if(!CUser){%>
-            <a class="nav-link " aria-current="page" href="/signup"><b>Sign Up</b></a>
-            <a class="nav-link" href="/login"><b>Login</b></a>
+                     <a class="btn-auth" aria-current="page" href="/signup">Sign Up</a>
+           <a class="btn-auth" href="/login">Login</a>
           <%}%>
        <%if(CUser){%>
-        <a class="nav-link" href="/logout"><b>Logout</b></a>
+        <a class="btn-auth" href="/logout">Logout</a>
         <%}%>  
         </div>
       </div>
