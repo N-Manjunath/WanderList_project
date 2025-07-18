@@ -73,20 +73,7 @@ module.exports.EditListings=async (req, res,next) => {
 
 
 module.exports.UpdateListings=async (req, res) => {
-  //   let { id } = req.params;
-  //   const newListing=await Listing.findByIdAndUpdate(id, { ...req.body.listing },{new:true});
-  //   if(req.file)
-  //   {
-  //   let url=req.file.path;
-  //  // console.log(url);
-  //   let filename=req.file.filename;
-  //  // console.log(filename);
-  //   newListing.image={url,filename};
-  //  // console.log(newListing.image);
-  //   await newListing.save();
-  //   }
-  //   req.flash("success","The listing updated ");
-  //   res.redirect("/listings");
+  
     const { id } = req.params;
   const listing = await Listing.findById(id);
 
