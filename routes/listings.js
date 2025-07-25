@@ -13,10 +13,10 @@ const upload = multer({storage});
 
 router
   .route("/")
-  .get(wrapAsync(ListingController.index)) // Use the controller method for INDEX [cite: 1]
+  .get(wrapAsync(ListingController.index)) // Use the controller method for INDEX 
   .post(
     isLoggedin,
-    upload.single("listing[image]"), // Ensure the field name matches your form's input name [cite: 1]
+    upload.single("listing[image]"), // Ensure the field name matches your form's input name
     validatelisting,
     wrapAsync(ListingController.CreateListings)
   );
@@ -32,7 +32,7 @@ router
   .get(wrapAsync(ListingController.ShowListings))
   .put(
     isLoggedin,
-    upload.single("listing[image]"), // Ensure the field name matches your form's input name [cite: 1]
+    upload.single("listing[image]"), // Ensure the field name matches your form's input name 2
     isOwner,
     validatelisting,
     wrapAsync(ListingController.UpdateListings)

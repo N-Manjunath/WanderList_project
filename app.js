@@ -64,23 +64,21 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
-  // res.locals.CUser = req.user || null;
-    res.locals.CUser = req.user; 
+  res.locals.CUser = req.user; 
   next();
 });
 
 
 // Import routers after all middleware that they might depend on (like passport, flash)
-const listingRouter = require("./routes/listing"); // Assuming this path is correct
-const reviewRouter = require("./routes/review");   // Assuming this path is correct
-const userRouter = require("./routes/user");     // Assuming this path is correct
-
+const listingRouter = require("./routes/listings.js"); 
+const reviewRouter = require("./routes/review");   
+const userRouter = require("./routes/user");
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter); // User routes are often mounted at the root
 
 app.get("/", (req, res) => {
-  res.render("lists/home.ejs");
+  res.render("./lists/home.ejs");
 });
 
 app.all("*", (req, res, next) => {

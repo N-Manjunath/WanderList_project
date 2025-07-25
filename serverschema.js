@@ -4,11 +4,7 @@ module.exports.listingSchema=joi.object({
     listing:joi.object({
     title:joi.string().required(),
     description:joi.string().required(),
-    // image:
-    // {url:joi.string().required(),
-    // filename:joi.string().required(),
-    // },
-     image: joi.object({ // Changed to joi.object since it has sub-properties
+     image: joi.object({ 
     url: joi.string(),
     filename: joi.string(),
      }).optional(),

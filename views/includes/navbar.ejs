@@ -1,106 +1,175 @@
 <style>
-  .search-info
-  {
-    
-  }
-  .search-btn
-  {
+  .search-btn {
     background-color: brown;
     color: white;
     border-radius: 3rem;
   }
-  .me-2
-  {
-    padding: 0rem 0rem 0rem 8rem;
+
+  .me-2 {
+    padding: 0rem 0rem 0rem 4rem; /* Adjusted for better text alignment */
     width: 25rem;
     border-radius: 3rem;
-    margin-left: 1rem;
+    margin-left: 8rem;
   }
-  .search-btn:hover
-  {
+  .search-btn:hover {
     background-color: brown;
-    
-    
-  }
-  
-  .search-icon
-  {
-    margin-right: 0.7rem;
   }
 
-  .btn-list
-  {
+  .btn-list {
     background-color: rgb(154, 33, 17);
-  color: white;
-  text-decoration: none;
-  border-radius: 3rem;
-  padding: 8px 16px;
-  display: inline-block;
-  transition: 0.3s;
-  margin-right: 8px;
+    color: white;
+    text-decoration: none;
+    border-radius: 3rem;
+    padding: 7px 9px;
+    display: inline-block;
+    transition: 0.3s;
+    margin-top: 6px;
+    margin-right: 8px;
   }
-  .btn-list:hover
-  {
-      background-color: #fff;
-  color: brown;
-  border: 2px solid brown;
+
+  .btn-list:hover {
+    background-color: #fff;
+    color: brown;
+    border: 2px solid brown;
   }
+
   .btn-list:active {
-  background-color: #8b0000; /* Darker shade of brown */
-  color: white;
-  border: 2px solid #5c1d1d;
-}
- .btn-auth {
-  background-color: brown;
-  color: white;
-  text-decoration: none;
-  border-radius: 3rem;
-  padding: 8px 14px;
-  display: inline-block;
-  transition: 0.3s;
-  margin-right: 8px;
-}
+    background-color: #8b0000;
+    color: white;
+    border: 2px solid #5c1d1d;
+  }
+  .btn-auth {
+    background-color: rgb(154, 33, 17);
+    color: white;
+    text-decoration: none;
+    border-radius: 3rem;
+    padding: 8px 12px;
+    transition: 0.3s;
+  }
 
-.btn-auth:hover {
-  background-color: #fff;
-  color: brown;
-  border: 2px solid brown;
-}
-/* Click (active) effect */
-.btn-auth:active {
-  background-color: #8b0000; /* Darker shade of brown */
-  color: white;
-  border: 2px solid #5c1d1d;
-}
+  .btn-auth:hover {
+    background-color: #fff;
+    color: brown;
+    border: 2px solid brown;
+  }
 
+  .btn-auth:active {
+    background-color: #8b0000;
+    color: white;
+    border: 2px solid #5c1d1d;
+  }
 
+  .btn-toggle-sort {
+    margin-left: 2rem;
+    background-color: brown;
+    color: white;
+    text-decoration: none;
+    border-radius: 3rem;
+    padding: 5px 9px;
+    transition: 0.3s;
+  }
+
+  .btn-toggle-sort:hover {
+    background-color: #fff;
+    color: brown;
+    border: 2px solid brown;
+  }
+
+  .dropdown-submenu {
+    position: relative;
+  }
+
+  .dropdown-submenu .submenu {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 8px;
+    min-width: 180px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+  }
+
+  .dropdown-submenu:hover .submenu {
+    display: block;
+  }
 </style>
+
 <nav class="navbar navbar-expand-md sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/listings"><i class="fa fa-bars" aria-hidden="true"></i></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="btn-list" href="/listings">All Lists</a>
-        </div>
-        <div class="search-info ms-auto">
-        <form class="d-flex" role="search" action="/listings" method="GET">
-          <input class="form-control me-2" name="search" type="search" placeholder="Search destination" aria-label="Search"  value="<%= typeof search !== 'undefined' ? search : '' %>">
-          <button class="btn search-btn" type="submit" id="searchButton"><i class="fa-solid fa-magnifying-glass search-icon"></i>Search</button>
-        </form>
-        </div>
-        <div class="navbar-nav ms-auto">
-          <a class="btn-list" href="/listings/new">Add new list</a>
-          <%if(!CUser){%>
-                     <a class="btn-auth" aria-current="page" href="/signup">Sign Up</a>
-           <a class="btn-auth" href="/login">Login</a>
-          <%}%>
-       <%if(CUser){%>
-        <a class="btn-auth" href="/logout">Logout</a>
-        <%}%>  
-        </div>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa fa-bars" aria-hidden="true"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="btn-list" href="/listings">All Lists</a>
+        <a class="btn-list" href="/listings/new">Add new list</a>
       </div>
+        <div class="search-info d-flex justify-content-center align-items-center">
+          <form class="d-flex" role="search" action="/listings" method="GET">
+            <input class="form-control me-2" name="search" type="search" placeholder="Search destination" aria-label="Search" value="<%= typeof search !== 'undefined' ? search : '' %>">
+            <button class="btn search-btn" type="submit" id="searchButton"><i class="fa-solid fa-magnifying-glass search-icon"></i>Search</button>
+          </form>
+        </div>
+        <div class="dropdown">
+          <button class="btn btn-toggle-sort dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa fa-filter" style="font-size:0.8rem;"></i> Sort by
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/listings?sort=priceLowHigh">Price: Low to High</a></li>
+            <li><a class="dropdown-item" href="/listings?sort=priceHighLow">Price: High to Low</a></li>
+            <li class="dropdown-submenu">
+              <a class="dropdown-item" href="#">Country ▸</a>
+             <div class="submenu">
+  <form method="GET" action="/listings">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="countries" value="India" id="countryIndia">
+      <label class="form-check-label" for="countryIndia">India</label>
     </div>
-  </nav>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" name="countries" value="Other" id="countryOther">
+      <label class="form-check-label" for="countryOther">Other</label>
+    </div>
+    <button type="submit" class="btn btn-sm btn-primary mt-2">Apply</button>
+  </form>
+</div>
+
+            </li>
+            <li class="dropdown-submenu">
+              <a class="dropdown-item" href="#">Ratings ▸</a>
+              <div class="submenu">
+                <form method="GET" action="/listings">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ratings" value="2-5" id="rating25">
+                    <label class="form-check-label" for="rating25">2-5</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ratings" value="3-5" id="rating35">
+                    <label class="form-check-label" for="rating35">3-5</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="ratings" value="4-5" id="rating45">
+                    <label class="form-check-label" for="rating45">4-5</label>
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-primary mt-2">Apply</button>
+                </form>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="navbar-nav ms-auto gap-2" style="margin-right: 20px;">
+          <% if(!CUser) { %>
+          <a class="btn-auth ms-2" aria-current="page" href="/signup">Sign Up</a>
+          <a class="btn-auth ms-2" href="/login">Login</a>
+          <% } %>
+          <% if(CUser) { %>
+          <a class="btn-auth ms-2" href="/logout">Logout</a>
+          <% } %>
+        </div>
+    </div>
+  </div>
+</nav>

@@ -53,6 +53,7 @@ h2
 .card-img-top
 {
     width: 100% !important;
+    height: 14rem!important;
     border-radius: 1rem !important;
     object-fit: cover !important;
     

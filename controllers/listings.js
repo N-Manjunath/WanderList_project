@@ -1,29 +1,44 @@
 const Listing=require("../models/model.js");
 const ExpressError=require("../ExpressError.js");
-module.exports.index=async (req, res) => {
-  const { search } = req.query;
-  console.log(search);
-  let allListings;
- let priceNumber = Number(search);
-  if (search) {
-    // Case-insensitive partial match for 'title' or 'location' or any relevant field
-    allListings = await Listing.find({
- $or: [
+//new index route
+module.exports.index = async (req, res) => {
+  const { search, sort, countries } = req.query;
+  let query = {};
+ if (search) {
+  query.$or = [
     { title: { $regex: search, $options: 'i' } },
     { country: { $regex: search, $options: 'i' } },
-    { location: { $regex: search, $options: 'i' } },
-      ...(isNaN(priceNumber) ? [] : [{ price: { $lte: priceNumber } }])
-  ]
-    });
-    console.log(allListings);
+    { location: { $regex: search, $options: 'i' } }
+  ];
+}
+
+
+
+  if (countries) {
+  const countryArray = Array.isArray(countries) ? countries : [countries];
+
+  if (countryArray.includes("Other")) {
+    // If "Other" is selected, show listings that are NOT India
+    query.country = { $ne: "India" };
   } else {
-    allListings= await Listing.find({});
-        console.log(allListings);
+    // If specific countries selected, show only those
+    query.country = { $in: countryArray };
   }
-    //const allListings = await Listing.find();
-   //console.log(allListings);
-    res.render("./lists/index.ejs", {allListings,search});
-  };
+}
+  let allListingsQuery = Listing.find(query);
+
+  // ✅ Apply sorting:
+  if (sort === 'priceLowHigh') {
+    allListingsQuery = allListingsQuery.sort({ price: 1 });
+  } else if (sort === 'priceHighLow') {
+    allListingsQuery = allListingsQuery.sort({ price: -1 });
+  }
+
+  const allListings = await allListingsQuery.exec();
+
+  return res.render("./lists/index.ejs", { allListings, search });
+};
+
   module.exports.CreateListings=async (req, res) => {
     let url=req.file.path;
     let filename=req.file.filename;
@@ -40,9 +55,7 @@ module.exports.NewListing=(req, res) => {
 };
 module.exports.filterByCategory = async (req, res) => {
   const { Name } = req.params;
-  console.log(Name);
   const allListings = await Listing.find({ category:Name });
-  console.log(allListings);
   res.render("./lists/index.ejs", {allListings}); // or your listing view
 };
 
@@ -54,11 +67,9 @@ module.exports.ShowListings=async (req, res,next) => {
    const listing = await Listing.findById(id).populate({path:"reviews",populate:{path:"author",},}).populate("owner");
    if(!listing)
    {
-    req.flash("error","the listing does not exists");
-    //console.log("the listing does not exists");
+    req.flash("error","the listing does not exists");;
     res.redirect("/listings");
    }
-//console.log(listing);
     res.render("./lists/show.ejs", { listing });
 }; 
 

@@ -1,6 +1,3 @@
-// This file is typically for isolated testing or a separate server process.
-// Your main application logic resides in app.js.
-
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config(); // Load .env for this specific server if needed
 }
@@ -8,11 +5,9 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const session = require("express-session");
-const MongoStore = require("connect-mongo"); // Need to require MongoStore if using it here
+const MongoStore = require("connect-mongo"); 
 
 const atlas_url = process.env.ATLAS_DB; // Ensure this is available if using MongoStore
-
-// MongoStore for session storage (if you want to persist sessions in this test server)
 const store = MongoStore.create({
   mongoUrl: atlas_url,
   crypto: {
