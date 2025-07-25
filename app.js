@@ -78,7 +78,7 @@ app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter); // User routes are often mounted at the root
 
 app.get("/", (req, res) => {
-  res.render("./lists/home.ejs");
+  res.redirect("/listings");
 });
 
 app.all("*", (req, res, next) => {
