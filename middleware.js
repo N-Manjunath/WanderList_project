@@ -32,7 +32,7 @@ module.exports.isOwner = async (req, res, next) => {
 
   // Ensure owner exists and then check for ownership
   if (!listing.owner || !listing.owner.equals(res.locals.CUser._id)) {
-    req.flash("error", "You do not have permission to do that!");
+    req.flash("error", "You are not Authorized to do that!");
     return res.redirect(`/listings/${id}`);
   }
   next();
